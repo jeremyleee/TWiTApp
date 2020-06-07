@@ -52,7 +52,12 @@ struct APIFetcher {
     static func episodes(fromJSON data: Data) -> Result<[TwitEpisode],Error> {
         do {
             let decoder = JSONDecoder()
-            decoder.dateDecodingStrategy = .iso8601
+            
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss'Z'"
+            dateFormatter.locale = Locale(identifier: "en_US_POSIX")
+            dateFormatter.timeZone = TimeZone(secondsFromGMT: 0)
+            decoder.dateDecodingStrategy = .formatted(dateFormatter)
             
             let response = try decoder.decode(TwitEpisodeResponse.self, from: data)
             return .success(response.episodes)

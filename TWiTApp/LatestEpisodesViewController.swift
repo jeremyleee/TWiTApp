@@ -21,8 +21,15 @@ class LatestEpisodesViewController: UIViewController, UITableViewDelegate {
         tableView.delegate = self
         tableView.dataSource = episodeDataSource
         
+        updateDataSource()
+        
         store.fetchLatestEpisodes { result in
-            // TODO: fetch from db
+            self.updateDataSource()
+        }
+    }
+    
+    private func updateDataSource() {
+        store.fetchAllEpisodes { result in
             switch result {
             case let .success(episodes):
                 self.episodeDataSource.episodes = episodes

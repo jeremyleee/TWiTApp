@@ -7,8 +7,19 @@
 //
 
 import Foundation
+import CoreData
 
 struct TwitDataStore {
+    
+    let persistentContainer: NSPersistentContainer = {
+        let container = NSPersistentContainer(name: "TWiTApp")
+        container.loadPersistentStores { description, error in
+            if let error = error {
+                print("Error setting up Core Data (\(error)).")
+            }
+        }
+        return container
+    }()
     
     private let session: URLSession = {
         let config = URLSessionConfiguration.default
@@ -33,21 +44,63 @@ struct TwitDataStore {
             return
         }
         
-        switch APIFetcher.episodes(fromJSON: jsonData) {
-        case let .success(twitEpisodes):
-            // TODO: Find existing episodes
-            
-            let episodes = twitEpisodes.map {
-                return Episode(
-                    id: $0.id,
-                    label: $0.label,
-                    teaser: $0.teaser
-                )
+        persistentContainer.performBackgroundTask { context in
+            switch APIFetcher.episodes(fromJSON: jsonData) {
+            case let .success(twitEpisodes):
+                let episodes = twitEpisodes.map { twitEpisode -> Episode in
+                    let fetchRequest: NSFetchRequest<Episode> = Episode.fetchRequest()
+                    fetchRequest.predicate = NSPredicate(format: "\(#keyPath(Episode.id)) == \(twitEpisode.id)")
+                    
+                    var fetchedEpisodes: [Episode]?
+                    context.performAndWait {
+                        fetchedEpisodes = try? fetchRequest.execute()
+                    }
+                    if let existingEpisode = fetchedEpisodes?.first {
+                        return existingEpisode
+                    }
+                    
+                    var episode: Episode!
+                    context.performAndWait {
+                        episode = Episode(context: context)
+                        episode.id = Int64(twitEpisode.id)
+                        episode.title = twitEpisode.label
+                        episode.teaser = twitEpisode.teaser
+                        episode.airingDate = twitEpisode.airingDate
+                    }
+                    return episode
+                }
+                
+                do {
+                    try context.save()
+                } catch {
+                    print("Error saving to Core Data: \(error).")
+                    completion(.failure(error))
+                    return
+                }
+                
+                let episodeIDs = episodes.map { $0.objectID }
+                let viewContext = self.persistentContainer.viewContext
+                let viewContextEpisodes = episodeIDs.map { viewContext.object(with: $0) } as! [Episode]
+                completion(.success(viewContextEpisodes))
+                
+            case let .failure(error):
+                completion(.failure(error))
             }
-            completion(.success(episodes))
-            
-        case let .failure(error):
-            completion(.failure(error))
+        }
+    }
+    
+    func fetchAllEpisodes(completion: @escaping (Result<[Episode],Error>) -> Void) {
+        let fetchRequest: NSFetchRequest<Episode> = Episode.fetchRequest()
+        let sortByDate = NSSortDescriptor(key: #keyPath(Episode.airingDate), ascending: false)
+        fetchRequest.sortDescriptors = [sortByDate]
+        
+        persistentContainer.viewContext.perform {
+            do {
+                let allEpisodes = try fetchRequest.execute()
+                completion(.success(allEpisodes))
+            } catch {
+                completion(.failure(error))
+            }
         }
     }
     

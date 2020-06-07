@@ -20,7 +20,7 @@ class EpisodeDataSource: NSObject, UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: "EpisodeCell", for: indexPath)
         
         let episode = episodes[indexPath.row]
-        cell.textLabel?.text = episode.label
+        cell.textLabel?.text = episode.title
         cell.detailTextLabel?.text = episode.teaser
         
         return cell
