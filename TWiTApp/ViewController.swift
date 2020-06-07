@@ -9,10 +9,19 @@
 import UIKit
 
 class ViewController: UIViewController {
+    
+    var store: TwitDataStore!
 
     override func viewDidLoad() {
-        super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        super.viewDidLoad()        
+        store.fetchLatestEpisodes { result in
+            switch result {
+            case let .success(episodes):
+                print("episode count: \(episodes.count)")
+            case let .failure(error):
+                print("error: \(error)")
+            }
+        }
     }
 
 
