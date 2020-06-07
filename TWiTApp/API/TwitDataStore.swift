@@ -66,6 +66,9 @@ struct TwitDataStore {
                         episode.title = twitEpisode.label
                         episode.teaser = twitEpisode.teaser
                         episode.airingDate = twitEpisode.airingDate
+                        episode.videoHdUrl = twitEpisode.videoHdInfo?.mediaUrl
+                        episode.videoLargeUrl = twitEpisode.videoLargeInfo?.mediaUrl
+                        episode.videoSmallUrl = twitEpisode.videoSmallInfo?.mediaUrl
                     }
                     return episode
                 }
