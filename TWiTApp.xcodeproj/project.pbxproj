@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		3F83C3A2248D367B00C4D427 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F83C3A1248D367B00C4D427 /* AppDelegate.swift */; };
 		3F83C3A4248D367B00C4D427 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F83C3A3248D367B00C4D427 /* SceneDelegate.swift */; };
-		3F83C3A6248D367B00C4D427 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F83C3A5248D367B00C4D427 /* ViewController.swift */; };
+		3F83C3A6248D367B00C4D427 /* LatestEpisodesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F83C3A5248D367B00C4D427 /* LatestEpisodesViewController.swift */; };
 		3F83C3A9248D367B00C4D427 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3F83C3A7248D367B00C4D427 /* Main.storyboard */; };
 		3F83C3AB248D368300C4D427 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3F83C3AA248D368300C4D427 /* Assets.xcassets */; };
 		3F83C3AE248D368300C4D427 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3F83C3AC248D368300C4D427 /* LaunchScreen.storyboard */; };
@@ -17,13 +17,14 @@
 		3F83C3B8248D3A4300C4D427 /* TwitDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F83C3B7248D3A4300C4D427 /* TwitDataStore.swift */; };
 		3F83C3BC248D4D3F00C4D427 /* TwitEpisode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F83C3BB248D4D3F00C4D427 /* TwitEpisode.swift */; };
 		3F83C3BE248D58BA00C4D427 /* Episode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F83C3BD248D58BA00C4D427 /* Episode.swift */; };
+		3F83C3C0248D602600C4D427 /* EpisodeDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F83C3BF248D602600C4D427 /* EpisodeDataSource.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		3F83C39E248D367B00C4D427 /* TWiTApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TWiTApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3F83C3A1248D367B00C4D427 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3F83C3A3248D367B00C4D427 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		3F83C3A5248D367B00C4D427 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		3F83C3A5248D367B00C4D427 /* LatestEpisodesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LatestEpisodesViewController.swift; sourceTree = "<group>"; };
 		3F83C3A8248D367B00C4D427 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		3F83C3AA248D368300C4D427 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		3F83C3AD248D368300C4D427 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -32,6 +33,7 @@
 		3F83C3B7248D3A4300C4D427 /* TwitDataStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TwitDataStore.swift; sourceTree = "<group>"; };
 		3F83C3BB248D4D3F00C4D427 /* TwitEpisode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TwitEpisode.swift; sourceTree = "<group>"; };
 		3F83C3BD248D58BA00C4D427 /* Episode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Episode.swift; sourceTree = "<group>"; };
+		3F83C3BF248D602600C4D427 /* EpisodeDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EpisodeDataSource.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -68,13 +70,14 @@
 				3F83C3B7248D3A4300C4D427 /* TwitDataStore.swift */,
 				3F83C3A1248D367B00C4D427 /* AppDelegate.swift */,
 				3F83C3A3248D367B00C4D427 /* SceneDelegate.swift */,
-				3F83C3A5248D367B00C4D427 /* ViewController.swift */,
+				3F83C3A5248D367B00C4D427 /* LatestEpisodesViewController.swift */,
 				3F83C3A7248D367B00C4D427 /* Main.storyboard */,
 				3F83C3AA248D368300C4D427 /* Assets.xcassets */,
 				3F83C3AC248D368300C4D427 /* LaunchScreen.storyboard */,
 				3F83C3AF248D368400C4D427 /* Info.plist */,
 				3F83C3BB248D4D3F00C4D427 /* TwitEpisode.swift */,
 				3F83C3BD248D58BA00C4D427 /* Episode.swift */,
+				3F83C3BF248D602600C4D427 /* EpisodeDataSource.swift */,
 			);
 			path = TWiTApp;
 			sourceTree = "<group>";
@@ -153,9 +156,10 @@
 				3F83C3B8248D3A4300C4D427 /* TwitDataStore.swift in Sources */,
 				3F83C3BC248D4D3F00C4D427 /* TwitEpisode.swift in Sources */,
 				3F83C3BE248D58BA00C4D427 /* Episode.swift in Sources */,
-				3F83C3A6248D367B00C4D427 /* ViewController.swift in Sources */,
+				3F83C3A6248D367B00C4D427 /* LatestEpisodesViewController.swift in Sources */,
 				3F83C3A2248D367B00C4D427 /* AppDelegate.swift in Sources */,
 				3F83C3B6248D37AE00C4D427 /* APIFetcher.swift in Sources */,
+				3F83C3C0248D602600C4D427 /* EpisodeDataSource.swift in Sources */,
 				3F83C3A4248D367B00C4D427 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

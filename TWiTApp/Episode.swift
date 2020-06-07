@@ -11,4 +11,5 @@ import Foundation
 struct Episode {
     let id: Int
     let label: String
+    let teaser: String
 }

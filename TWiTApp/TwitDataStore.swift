@@ -38,7 +38,11 @@ struct TwitDataStore {
             // TODO: Find existing episodes
             
             let episodes = twitEpisodes.map {
-                return Episode(id: $0.id, label: $0.label)
+                return Episode(
+                    id: $0.id,
+                    label: $0.label,
+                    teaser: $0.teaser
+                )
             }
             completion(.success(episodes))
             
