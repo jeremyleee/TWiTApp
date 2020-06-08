@@ -39,6 +39,20 @@ class LatestEpisodesViewController: UIViewController, UITableViewDelegate {
             self.tableView.reloadSections(IndexSet(integer: 0), with: .automatic)
         }
     }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        switch segue.identifier {
+        case "showEpisodeDetail":
+            if let episodeDetailViewController = segue.destination as? EpisodeDetailViewController {
+                if let selectedIndexPath = tableView.indexPathForSelectedRow {
+                    let episode = episodeDataSource.episodes[selectedIndexPath.row]
+                    episodeDetailViewController.episode = episode
+                }
+            }
+        default:
+            preconditionFailure("Storyboard segue not found")
+        }
+    }
 
 }
 

@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3F110FDC248EDDC8001F0A6D /* Episode+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F110FDA248EDDC8001F0A6D /* Episode+CoreDataClass.swift */; };
+		3F110FDD248EDDC8001F0A6D /* Episode+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F110FDB248EDDC8001F0A6D /* Episode+CoreDataProperties.swift */; };
 		3F83C3A2248D367B00C4D427 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F83C3A1248D367B00C4D427 /* AppDelegate.swift */; };
 		3F83C3A4248D367B00C4D427 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F83C3A3248D367B00C4D427 /* SceneDelegate.swift */; };
 		3F83C3A6248D367B00C4D427 /* LatestEpisodesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F83C3A5248D367B00C4D427 /* LatestEpisodesViewController.swift */; };
@@ -18,9 +20,12 @@
 		3F83C3BC248D4D3F00C4D427 /* TwitEpisode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F83C3BB248D4D3F00C4D427 /* TwitEpisode.swift */; };
 		3F83C3C0248D602600C4D427 /* EpisodeDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F83C3BF248D602600C4D427 /* EpisodeDataSource.swift */; };
 		3F83C3C4248D657400C4D427 /* TWiTApp.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 3F83C3C2248D657400C4D427 /* TWiTApp.xcdatamodeld */; };
+		3F96F3A8248DA5C300C2209A /* EpisodeDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F96F3A7248DA5C300C2209A /* EpisodeDetailViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3F110FDA248EDDC8001F0A6D /* Episode+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Episode+CoreDataClass.swift"; path = "TWiTApp/Model/Episode+CoreDataClass.swift"; sourceTree = SOURCE_ROOT; };
+		3F110FDB248EDDC8001F0A6D /* Episode+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Episode+CoreDataProperties.swift"; path = "TWiTApp/Model/Episode+CoreDataProperties.swift"; sourceTree = SOURCE_ROOT; };
 		3F83C39E248D367B00C4D427 /* TWiTApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TWiTApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3F83C3A1248D367B00C4D427 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3F83C3A3248D367B00C4D427 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -34,6 +39,7 @@
 		3F83C3BB248D4D3F00C4D427 /* TwitEpisode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TwitEpisode.swift; sourceTree = "<group>"; };
 		3F83C3BF248D602600C4D427 /* EpisodeDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EpisodeDataSource.swift; sourceTree = "<group>"; };
 		3F83C3C3248D657400C4D427 /* TWiTApp.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = TWiTApp.xcdatamodel; sourceTree = "<group>"; };
+		3F96F3A7248DA5C300C2209A /* EpisodeDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EpisodeDetailViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -47,11 +53,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3F110FDE248EE5E1001F0A6D /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				3F110FDA248EDDC8001F0A6D /* Episode+CoreDataClass.swift */,
+				3F110FDB248EDDC8001F0A6D /* Episode+CoreDataProperties.swift */,
+				3F83C3C2248D657400C4D427 /* TWiTApp.xcdatamodeld */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		3F83C395248D367B00C4D427 = {
 			isa = PBXGroup;
 			children = (
 				3F83C3A0248D367B00C4D427 /* TWiTApp */,
 				3F83C39F248D367B00C4D427 /* Products */,
+				3F83C3C5248D90D700C4D427 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -66,16 +83,17 @@
 		3F83C3A0248D367B00C4D427 /* TWiTApp */ = {
 			isa = PBXGroup;
 			children = (
-				3F83C3C2248D657400C4D427 /* TWiTApp.xcdatamodeld */,
 				3F83C3C1248D650700C4D427 /* API */,
 				3F83C3A1248D367B00C4D427 /* AppDelegate.swift */,
-				3F83C3A3248D367B00C4D427 /* SceneDelegate.swift */,
-				3F83C3A5248D367B00C4D427 /* LatestEpisodesViewController.swift */,
-				3F83C3A7248D367B00C4D427 /* Main.storyboard */,
 				3F83C3AA248D368300C4D427 /* Assets.xcassets */,
-				3F83C3AC248D368300C4D427 /* LaunchScreen.storyboard */,
-				3F83C3AF248D368400C4D427 /* Info.plist */,
 				3F83C3BF248D602600C4D427 /* EpisodeDataSource.swift */,
+				3F96F3A7248DA5C300C2209A /* EpisodeDetailViewController.swift */,
+				3F83C3AF248D368400C4D427 /* Info.plist */,
+				3F83C3A5248D367B00C4D427 /* LatestEpisodesViewController.swift */,
+				3F83C3AC248D368300C4D427 /* LaunchScreen.storyboard */,
+				3F83C3A7248D367B00C4D427 /* Main.storyboard */,
+				3F110FDE248EE5E1001F0A6D /* Model */,
+				3F83C3A3248D367B00C4D427 /* SceneDelegate.swift */,
 			);
 			path = TWiTApp;
 			sourceTree = "<group>";
@@ -88,6 +106,13 @@
 				3F83C3B7248D3A4300C4D427 /* TwitDataStore.swift */,
 			);
 			path = API;
+			sourceTree = "<group>";
+		};
+		3F83C3C5248D90D700C4D427 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -165,10 +190,13 @@
 				3F83C3BC248D4D3F00C4D427 /* TwitEpisode.swift in Sources */,
 				3F83C3A6248D367B00C4D427 /* LatestEpisodesViewController.swift in Sources */,
 				3F83C3A2248D367B00C4D427 /* AppDelegate.swift in Sources */,
+				3F96F3A8248DA5C300C2209A /* EpisodeDetailViewController.swift in Sources */,
+				3F110FDD248EDDC8001F0A6D /* Episode+CoreDataProperties.swift in Sources */,
 				3F83C3B6248D37AE00C4D427 /* APIFetcher.swift in Sources */,
 				3F83C3C4248D657400C4D427 /* TWiTApp.xcdatamodeld in Sources */,
 				3F83C3C0248D602600C4D427 /* EpisodeDataSource.swift in Sources */,
 				3F83C3A4248D367B00C4D427 /* SceneDelegate.swift in Sources */,
+				3F110FDC248EDDC8001F0A6D /* Episode+CoreDataClass.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

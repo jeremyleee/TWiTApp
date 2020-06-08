@@ -47,30 +47,8 @@ struct TwitDataStore {
         persistentContainer.performBackgroundTask { context in
             switch APIFetcher.episodes(fromJSON: jsonData) {
             case let .success(twitEpisodes):
-                let episodes = twitEpisodes.map { twitEpisode -> Episode in
-                    let fetchRequest: NSFetchRequest<Episode> = Episode.fetchRequest()
-                    fetchRequest.predicate = NSPredicate(format: "\(#keyPath(Episode.id)) == \(twitEpisode.id)")
-                    
-                    var fetchedEpisodes: [Episode]?
-                    context.performAndWait {
-                        fetchedEpisodes = try? fetchRequest.execute()
-                    }
-                    if let existingEpisode = fetchedEpisodes?.first {
-                        return existingEpisode
-                    }
-                    
-                    var episode: Episode!
-                    context.performAndWait {
-                        episode = Episode(context: context)
-                        episode.id = Int64(twitEpisode.id)
-                        episode.title = twitEpisode.label
-                        episode.teaser = twitEpisode.teaser
-                        episode.airingDate = twitEpisode.airingDate
-                        episode.videoHdUrl = twitEpisode.videoHdInfo?.mediaUrl
-                        episode.videoLargeUrl = twitEpisode.videoLargeInfo?.mediaUrl
-                        episode.videoSmallUrl = twitEpisode.videoSmallInfo?.mediaUrl
-                    }
-                    return episode
+                let episodes = twitEpisodes.compactMap { twitEpisode in
+                    self.fetchOrCreateEpisode(from: twitEpisode, with: context)
                 }
                 
                 do {
@@ -90,6 +68,68 @@ struct TwitDataStore {
                 completion(.failure(error))
             }
         }
+    }
+    
+    private func fetchOrCreateEpisode(from response: TwitEpisode, with context: NSManagedObjectContext) -> Episode? {
+        guard let show = fetchOrCreateShow(from: response.embedded.shows.first, with: context) else {
+            return nil
+        }
+        
+        var episode: Episode!
+
+        let fetchRequest: NSFetchRequest<Episode> = Episode.fetchRequest()
+        fetchRequest.predicate = NSPredicate(format: "\(#keyPath(Episode.id)) == \(response.id)")
+        
+        context.performAndWait {
+            let fetchedEpisodes = try? fetchRequest.execute()
+
+            if let existingEpisode = fetchedEpisodes?.first {
+                episode = existingEpisode
+            } else {
+                context.performAndWait {
+                    episode = Episode(context: context)
+                }
+            }
+                    
+            episode.id = Int64(response.id)
+            episode.title = response.label
+            episode.teaser = response.teaser
+            episode.showNotes = response.showNotes
+            episode.episodeNumber = response.episodeNumber
+            episode.airingDate = response.airingDate
+            episode.videoHdUrl = response.videoHdInfo?.mediaUrl
+            episode.videoLargeUrl = response.videoLargeInfo?.mediaUrl
+            episode.videoSmallUrl = response.videoSmallInfo?.mediaUrl
+            episode.show = show
+        }
+        
+        return episode
+    }
+    
+    private func fetchOrCreateShow(from response: TwitEpisode.Embedded.Show?, with context: NSManagedObjectContext) -> Show? {
+        guard let response = response, let id = Int64(response.id) else {
+            return nil
+        }
+        
+        var show: Show!
+        
+        let fetchShowRequest: NSFetchRequest<Show> = Show.fetchRequest()
+        fetchShowRequest.predicate = NSPredicate(format: "\(#keyPath(Show.id)) == \(response.id)")
+        
+        context.performAndWait {
+            let fetchedShows = try? fetchShowRequest.execute()
+            
+            if let existingShow = fetchedShows?.first {
+                show = existingShow
+            } else {
+                show = Show(context: context)
+            }
+            
+            show.id = id
+            show.title = response.label
+        }
+        
+        return show
     }
     
     func fetchAllEpisodes(completion: @escaping (Result<[Episode],Error>) -> Void) {

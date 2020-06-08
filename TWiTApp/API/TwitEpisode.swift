@@ -20,6 +20,7 @@ struct TwitEpisode: Codable {
     let videoHdInfo: VideoInfo?
     let videoLargeInfo: VideoInfo?
     let videoSmallInfo: VideoInfo?
+    let embedded: Embedded
     
     enum CodingKeys: String, CodingKey {
         case id
@@ -33,9 +34,20 @@ struct TwitEpisode: Codable {
         case videoHdInfo = "video_hd"
         case videoLargeInfo = "video_large"
         case videoSmallInfo = "video_small"
+        case embedded = "_embedded"
     }
 
     struct VideoInfo: Codable {
         let mediaUrl: String
     }
+    
+    struct Embedded: Codable {
+        let shows: [Show]
+        
+        struct Show: Codable {
+            let id: String
+            let label: String
+        }
+    }
+    
 }

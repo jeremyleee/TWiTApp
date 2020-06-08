@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="16119" systemVersion="19F101" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="Episode" representedClassName="Episode" syncable="YES">
+        <attribute name="airingDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="episodeNumber" optional="YES" attributeType="String"/>
+        <attribute name="id" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="showNotes" optional="YES" attributeType="String"/>
+        <attribute name="teaser" optional="YES" attributeType="String"/>
+        <attribute name="title" optional="YES" attributeType="String"/>
+        <attribute name="videoHdUrl" optional="YES" attributeType="String"/>
+        <attribute name="videoLargeUrl" optional="YES" attributeType="String"/>
+        <attribute name="videoSmallUrl" optional="YES" attributeType="String"/>
+        <relationship name="show" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Show" inverseName="episodes" inverseEntity="Show"/>
+    </entity>
+    <entity name="Show" representedClassName="Show" syncable="YES" codeGenerationType="class">
+        <attribute name="id" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="title" optional="YES" attributeType="String"/>
+        <relationship name="episodes" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Episode" inverseName="show" inverseEntity="Episode"/>
+    </entity>
+    <elements>
+        <element name="Episode" positionX="-63" positionY="-18" width="128" height="193"/>
+        <element name="Show" positionX="-63" positionY="45" width="128" height="88"/>
+    </elements>
+</model>
