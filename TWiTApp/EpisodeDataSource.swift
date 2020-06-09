@@ -22,9 +22,7 @@ class EpisodeDataSource: NSObject, UITableViewDataSource {
         
         if let episodeCell = cell as? EpisodeTableViewCell {
             let episode = episodes[indexPath.row]
-            if let heroImageUrl = episode.heroImageUrl {
-                episodeCell.thumbnailImageView.sd_setImage(with: URL(string: heroImageUrl))
-            }
+            episodeCell.thumbnailImageView.sd_setImage(with: URL(string: episode.heroImage.url))
             episodeCell.titleView.text = episode.showEpisodeTitle
             episodeCell.episodeNameView.text = episode.title
         }

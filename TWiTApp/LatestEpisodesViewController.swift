@@ -20,20 +20,14 @@ class LatestEpisodesViewController: UIViewController, UITableViewDelegate {
         
         tableView.delegate = self
         tableView.dataSource = episodeDataSource
-        
-        updateDataSource()
-        
+                
         store.fetchLatestEpisodes { result in
-            self.updateDataSource()
-        }
-    }
-    
-    private func updateDataSource() {
-        store.fetchAllEpisodes { result in
             switch result {
             case let .success(episodes):
+                print(episodes)
                 self.episodeDataSource.episodes = episodes
-            case .failure:
+            case let .failure(error):
+                print(error)
                 self.episodeDataSource.episodes.removeAll()
             }
             self.tableView.reloadSections(IndexSet(integer: 0), with: .automatic)

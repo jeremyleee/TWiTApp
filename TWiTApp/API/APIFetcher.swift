@@ -50,7 +50,7 @@ struct APIFetcher {
         return request
     }
     
-    static func episodes(fromJSON data: Data) -> Result<[TwitEpisode],Error> {
+    static func episodes(fromJSON data: Data) -> Result<[Episode],Error> {
         do {
             let decoder = JSONDecoder()
             
@@ -70,5 +70,5 @@ struct APIFetcher {
 }
 
 struct TwitEpisodeResponse: Codable {
-    let episodes: [TwitEpisode]
+    let episodes: [Episode]
 }

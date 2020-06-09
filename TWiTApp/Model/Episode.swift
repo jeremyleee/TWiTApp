@@ -8,9 +8,9 @@
 
 import Foundation
 
-struct TwitEpisode: Codable {
+class Episode: Codable {
     let id: Int
-    let label: String
+    let title: String
     let cleanPath: String
     let ttl: String
     let episodeNumber: String
@@ -24,9 +24,18 @@ struct TwitEpisode: Codable {
     let videoAudioInfo: VideoInfo?
     let embedded: Embedded
     
+    var show: Show? {
+        embedded.shows.first
+    }
+    
+    var showEpisodeTitle: String {
+        let showTitle = self.show?.title ?? ""
+        return "\(showTitle) \(episodeNumber)"
+    }
+    
     enum CodingKeys: String, CodingKey {
         case id
-        case label
+        case title = "label"
         case cleanPath
         case ttl
         case episodeNumber
@@ -51,11 +60,6 @@ struct TwitEpisode: Codable {
     
     struct Embedded: Codable {
         let shows: [Show]
-        
-        struct Show: Codable {
-            let id: String
-            let label: String
-        }
     }
     
 }
