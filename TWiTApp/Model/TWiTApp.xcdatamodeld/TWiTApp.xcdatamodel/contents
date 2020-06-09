@@ -8,6 +8,7 @@
         <attribute name="showNotes" optional="YES" attributeType="String"/>
         <attribute name="teaser" optional="YES" attributeType="String"/>
         <attribute name="title" optional="YES" attributeType="String"/>
+        <attribute name="videoAudioUrl" optional="YES" attributeType="String"/>
         <attribute name="videoHdUrl" optional="YES" attributeType="String"/>
         <attribute name="videoLargeUrl" optional="YES" attributeType="String"/>
         <attribute name="videoSmallUrl" optional="YES" attributeType="String"/>
@@ -19,7 +20,7 @@
         <relationship name="episodes" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Episode" inverseName="show" inverseEntity="Episode"/>
     </entity>
     <elements>
-        <element name="Episode" positionX="-63" positionY="-18" width="128" height="208"/>
+        <element name="Episode" positionX="-63" positionY="-18" width="128" height="223"/>
         <element name="Show" positionX="-63" positionY="45" width="128" height="88"/>
     </elements>
 </model>

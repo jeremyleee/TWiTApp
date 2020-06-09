@@ -24,8 +24,9 @@ struct APIFetcher {
         "app-key": apiKey
     ]
     
-    static var latestEpisodesURLRequest: URLRequest {
-        return twitURL(endPoint: .episodes, parameters: nil)
+    
+    static func getLatestEpisodesRequest(withPage page: Int = 1) -> URLRequest {
+        return twitURL(endPoint: .episodes, parameters: ["page": String(page)])
     }
     
     private static func twitURL(endPoint: EndPoint, parameters: [String:String]?) -> URLRequest {

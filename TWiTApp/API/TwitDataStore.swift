@@ -27,12 +27,18 @@ struct TwitDataStore {
     }()
     
     func fetchLatestEpisodes(completion: @escaping (Result<[Episode],Error>) -> Void) {
-        let request = APIFetcher.latestEpisodesURLRequest
+        fetchLatestEpisodes(withPage: 1) { result in
+            OperationQueue.main.addOperation {
+                completion(result)
+            }
+        }
+    }
+    
+    private func fetchLatestEpisodes(withPage page: Int, completion: @escaping (Result<[Episode],Error>) -> Void) {
+        let request = APIFetcher.getLatestEpisodesRequest(withPage: page)
         let task = session.dataTask(with: request) { data, response, error in
             self.processEpisodeRequest(data: data, error: error) { result in
-                OperationQueue.main.addOperation {
-                    completion(result)
-                }
+                completion(result)
             }
         }
         task.resume()
@@ -98,6 +104,7 @@ struct TwitDataStore {
             episode.videoHdUrl = response.videoHdInfo?.mediaUrl
             episode.videoLargeUrl = response.videoLargeInfo?.mediaUrl
             episode.videoSmallUrl = response.videoSmallInfo?.mediaUrl
+            episode.videoAudioUrl = response.videoAudioInfo?.mediaUrl
             episode.heroImageUrl = response.heroImage.url
             episode.show = show
         }
@@ -135,6 +142,7 @@ struct TwitDataStore {
         let fetchRequest: NSFetchRequest<Episode> = Episode.fetchRequest()
         let sortByDate = NSSortDescriptor(key: #keyPath(Episode.airingDate), ascending: false)
         fetchRequest.sortDescriptors = [sortByDate]
+        fetchRequest.fetchLimit = 25
         
         persistentContainer.viewContext.perform {
             do {

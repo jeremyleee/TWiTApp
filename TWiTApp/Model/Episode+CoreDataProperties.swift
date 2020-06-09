@@ -19,6 +19,7 @@ extension Episode {
 
     @NSManaged public var airingDate: Date?
     @NSManaged public var episodeNumber: String?
+    @NSManaged public var heroImageUrl: String?
     @NSManaged public var id: Int64
     @NSManaged public var showNotes: String?
     @NSManaged public var teaser: String?
@@ -26,7 +27,7 @@ extension Episode {
     @NSManaged public var videoHdUrl: String?
     @NSManaged public var videoLargeUrl: String?
     @NSManaged public var videoSmallUrl: String?
-    @NSManaged public var heroImageUrl: String?
+    @NSManaged public var videoAudioUrl: String?
     @NSManaged public var show: Show?
 
 }
