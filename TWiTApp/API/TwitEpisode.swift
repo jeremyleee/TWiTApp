@@ -17,6 +17,7 @@ struct TwitEpisode: Codable {
     let airingDate: Date
     let teaser: String
     let showNotes: String
+    let heroImage: HeroImage
     let videoHdInfo: VideoInfo?
     let videoLargeInfo: VideoInfo?
     let videoSmallInfo: VideoInfo?
@@ -31,10 +32,15 @@ struct TwitEpisode: Codable {
         case airingDate
         case teaser
         case showNotes
+        case heroImage
         case videoHdInfo = "video_hd"
         case videoLargeInfo = "video_large"
         case videoSmallInfo = "video_small"
         case embedded = "_embedded"
+    }
+    
+    struct HeroImage: Codable {
+        let url: String
     }
 
     struct VideoInfo: Codable {

@@ -86,9 +86,7 @@ struct TwitDataStore {
             if let existingEpisode = fetchedEpisodes?.first {
                 episode = existingEpisode
             } else {
-                context.performAndWait {
-                    episode = Episode(context: context)
-                }
+                episode = Episode(context: context)
             }
                     
             episode.id = Int64(response.id)
@@ -100,6 +98,7 @@ struct TwitDataStore {
             episode.videoHdUrl = response.videoHdInfo?.mediaUrl
             episode.videoLargeUrl = response.videoLargeInfo?.mediaUrl
             episode.videoSmallUrl = response.videoSmallInfo?.mediaUrl
+            episode.heroImageUrl = response.heroImage.url
             episode.show = show
         }
         

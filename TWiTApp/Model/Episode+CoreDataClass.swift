@@ -12,6 +12,7 @@ import CoreData
 
 @objc(Episode)
 public class Episode: NSManagedObject {
+    
     var showEpisodeTitle: String {
         let showTitle = self.show?.title ?? ""
         let episodeNumber = self.episodeNumber ?? ""

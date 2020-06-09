@@ -1,0 +1,6 @@
+framework module Pods_TWiTApp {
+  umbrella header "Pods-TWiTApp-umbrella.h"
+
+  export *
+  module * { export * }
+}

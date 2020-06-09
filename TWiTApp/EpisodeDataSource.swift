@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SDWebImage
 
 class EpisodeDataSource: NSObject, UITableViewDataSource {
     
@@ -19,9 +20,14 @@ class EpisodeDataSource: NSObject, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "EpisodeCell", for: indexPath)
         
-        let episode = episodes[indexPath.row]
-        cell.textLabel?.text = episode.showEpisodeTitle
-        cell.detailTextLabel?.text = episode.title
+        if let episodeCell = cell as? EpisodeTableViewCell {
+            let episode = episodes[indexPath.row]
+            if let heroImageUrl = episode.heroImageUrl {
+                episodeCell.thumbnailImageView.sd_setImage(with: URL(string: heroImageUrl))
+            }
+            episodeCell.titleView.text = episode.showEpisodeTitle
+            episodeCell.episodeNameView.text = episode.title
+        }
         
         return cell
     }
