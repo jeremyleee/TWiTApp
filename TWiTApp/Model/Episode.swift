@@ -8,7 +8,8 @@
 
 import Foundation
 
-class Episode: Codable {
+class Episode: Codable, Equatable {
+    
     let id: Int
     let title: String
     let cleanPath: String
@@ -31,6 +32,10 @@ class Episode: Codable {
     var showEpisodeTitle: String {
         let showTitle = self.show?.title ?? ""
         return "\(showTitle) \(episodeNumber)"
+    }
+    
+    static func == (lhs: Episode, rhs: Episode) -> Bool {
+        return lhs.id == rhs.id
     }
     
     enum CodingKeys: String, CodingKey {

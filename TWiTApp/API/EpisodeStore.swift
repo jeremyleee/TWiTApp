@@ -9,9 +9,10 @@
 import Foundation
 import CoreData
 
-class TwitDataStore {
+class EpisodeStore {
     
-    var currentPage = 1
+    private var currentPage = 1
+    var latestEpisodes = [Episode]()
     
     private let session: URLSession = {
         let config = URLSessionConfiguration.default
@@ -20,8 +21,9 @@ class TwitDataStore {
     
     func fetchLatestEpisodes(completion: @escaping (Result<[Episode],Error>) -> Void) {
         fetchLatestEpisodes(withPage: currentPage) { result in
-            if case .success = result {
+            if case let .success(episodes) = result {
                 self.currentPage += 1
+                self.latestEpisodes += episodes
             }
             
             OperationQueue.main.addOperation {

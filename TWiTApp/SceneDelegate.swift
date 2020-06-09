@@ -21,7 +21,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         let navController = window!.rootViewController as! UINavigationController
         if let latestEpisodesViewController = navController.topViewController as? LatestEpisodesViewController {
-            latestEpisodesViewController.store = TwitDataStore()
+            latestEpisodesViewController.store = EpisodeStore()
         }
     }
 

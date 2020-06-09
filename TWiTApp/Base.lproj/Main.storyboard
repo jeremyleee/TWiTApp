@@ -15,7 +15,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="XoM-9L-bbd">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="249" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="XoM-9L-bbd">
                                 <rect key="frame" x="0.0" y="88" width="414" height="774"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <prototypes>
@@ -77,18 +77,24 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="yiX-yI-Lpg">
+                                <rect key="frame" x="188.5" y="429.5" width="37" height="37"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstItem="6sF-af-kp1" firstAttribute="trailing" secondItem="XoM-9L-bbd" secondAttribute="trailing" id="98r-Mc-Qxf"/>
+                            <constraint firstItem="yiX-yI-Lpg" firstAttribute="centerX" secondItem="I2b-bP-p11" secondAttribute="centerX" id="Rvv-3w-SmN"/>
                             <constraint firstItem="XoM-9L-bbd" firstAttribute="top" secondItem="6sF-af-kp1" secondAttribute="top" id="UsI-vb-c11"/>
                             <constraint firstItem="6sF-af-kp1" firstAttribute="bottom" secondItem="XoM-9L-bbd" secondAttribute="bottom" id="Zec-6f-y9J"/>
                             <constraint firstItem="XoM-9L-bbd" firstAttribute="leading" secondItem="6sF-af-kp1" secondAttribute="leading" id="eht-pV-BqE"/>
+                            <constraint firstItem="yiX-yI-Lpg" firstAttribute="centerY" secondItem="I2b-bP-p11" secondAttribute="centerY" id="l0j-v9-Lhw"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6sF-af-kp1"/>
                     </view>
                     <navigationItem key="navigationItem" title="Latest Episodes" id="nLl-vm-4ww"/>
                     <connections>
+                        <outlet property="loadingView" destination="yiX-yI-Lpg" id="g5T-T5-LXE"/>
                         <outlet property="tableView" destination="XoM-9L-bbd" id="XyV-DR-3iO"/>
                     </connections>
                 </viewController>
@@ -104,7 +110,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="a0z-o7-w02">
+                            <view contentMode="scaleToFill" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="233" translatesAutoresizingMaskIntoConstraints="NO" id="a0z-o7-w02">
                                 <rect key="frame" x="0.0" y="140" width="414" height="233"/>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>

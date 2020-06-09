@@ -8,11 +8,12 @@
 
 import UIKit
 
-class LatestEpisodesViewController: UIViewController, UITableViewDelegate {
-    
-    var store: TwitDataStore!
+class LatestEpisodesViewController: UIViewController, UITableViewDelegate, UITableViewDataSourcePrefetching {
+        
+    var store: EpisodeStore!
     private var episodeDataSource = EpisodeDataSource()
     
+    @IBOutlet var loadingView: UIActivityIndicatorView!
     @IBOutlet var tableView: UITableView!
     
     override func viewDidLoad() {
@@ -20,17 +21,36 @@ class LatestEpisodesViewController: UIViewController, UITableViewDelegate {
         
         tableView.delegate = self
         tableView.dataSource = episodeDataSource
+        tableView.prefetchDataSource = self
                 
+        loadNextLatestEpisodes()
+    }
+    
+    func loadNextLatestEpisodes() {
         store.fetchLatestEpisodes { result in
-            switch result {
-            case let .success(episodes):
-                print(episodes)
-                self.episodeDataSource.episodes = episodes
-            case let .failure(error):
-                print(error)
-                self.episodeDataSource.episodes.removeAll()
+            self.loadingView.stopAnimating()
+            if case let .success(episodes) = result {
+                self.updateDataSource(fetchedEpisodes: episodes)
             }
-            self.tableView.reloadSections(IndexSet(integer: 0), with: .automatic)
+        }
+    }
+    
+    func updateDataSource(fetchedEpisodes: [Episode]) {
+        episodeDataSource.episodes = store.latestEpisodes
+        let indexPaths = fetchedEpisodes.compactMap { episode -> IndexPath? in
+            if let index = episodeDataSource.episodes.firstIndex(of: episode) {
+                return IndexPath(row: index, section: 0)
+            } else {
+                return nil
+            }
+        }
+        tableView.insertRows(at: indexPaths, with: .fade)
+    }
+    
+    func tableView(_ tableView: UITableView, prefetchRowsAt indexPaths: [IndexPath]) {
+        let lastItemIndexPath = IndexPath(row: episodeDataSource.episodes.count - 1, section: 0)
+        if indexPaths.contains(lastItemIndexPath) {
+            loadNextLatestEpisodes()
         }
     }
     
