@@ -23,11 +23,21 @@ class EpisodeStore {
         fetchLatestEpisodes(withPage: currentPage) { result in
             if case let .success(episodes) = result {
                 self.currentPage += 1
-                self.latestEpisodes += episodes
+                self.addNewEpisodes(episodes)
             }
             
             OperationQueue.main.addOperation {
                 completion(result)
+            }
+        }
+    }
+    
+    private func addNewEpisodes(_ episodes: [Episode]) {
+        episodes.forEach { episode in
+            if let existingIndex = latestEpisodes.firstIndex(of: episode) {
+                latestEpisodes[existingIndex] = episode
+            } else {
+                latestEpisodes.append(episode)
             }
         }
     }
