@@ -30,21 +30,24 @@ class LatestEpisodesViewController: UIViewController, UITableViewDelegate, UITab
         store.fetchLatestEpisodes { result in
             self.loadingView.stopAnimating()
             if case let .success(episodes) = result {
-                self.updateDataSource(fetchedEpisodes: episodes)
+                self.updateDataSource(newEpisodes: episodes)
             }
         }
     }
     
-    func updateDataSource(fetchedEpisodes: [Episode]) {
+    private func updateDataSource(newEpisodes: [Episode]) {
         episodeDataSource.episodes = store.latestEpisodes
-        let indexPaths = fetchedEpisodes.compactMap { episode -> IndexPath? in
+        tableView.insertRows(at: getIndexPaths(for: newEpisodes), with: .fade)
+    }
+    
+    private func getIndexPaths(for episodes: [Episode]) -> [IndexPath] {
+        return episodes.compactMap { episode -> IndexPath? in
             if let index = episodeDataSource.episodes.firstIndex(of: episode) {
                 return IndexPath(row: index, section: 0)
             } else {
                 return nil
             }
         }
-        tableView.insertRows(at: indexPaths, with: .fade)
     }
     
     func tableView(_ tableView: UITableView, prefetchRowsAt indexPaths: [IndexPath]) {

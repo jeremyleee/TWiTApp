@@ -21,23 +21,28 @@ class EpisodeStore {
     
     func fetchLatestEpisodes(completion: @escaping (Result<[Episode],Error>) -> Void) {
         fetchLatestEpisodes(withPage: currentPage) { result in
-            if case let .success(episodes) = result {
+            switch result {
+            case let .success(episodes):
                 self.currentPage += 1
-                self.addNewEpisodes(episodes)
-            }
-            
-            OperationQueue.main.addOperation {
-                completion(result)
-            }
-        }
-    }
-    
-    private func addNewEpisodes(_ episodes: [Episode]) {
-        episodes.forEach { episode in
-            if let existingIndex = latestEpisodes.firstIndex(of: episode) {
-                latestEpisodes[existingIndex] = episode
-            } else {
-                latestEpisodes.append(episode)
+                
+                let existingEpisdes = episodes.filter { self.latestEpisodes.contains($0) }
+                let newEpisdes = episodes.filter { !self.latestEpisodes.contains($0) }
+                
+                existingEpisdes.forEach { episode in
+                    if let index = self.latestEpisodes.firstIndex(of: episode) {
+                        self.latestEpisodes[index] = episode
+                    }
+                }
+                
+                self.latestEpisodes.append(contentsOf: newEpisdes)
+                
+                OperationQueue.main.addOperation {
+                    completion(.success(newEpisdes))
+                }
+            case let .failure(error):
+                OperationQueue.main.addOperation {
+                    completion(.failure(error))
+                }
             }
         }
     }
